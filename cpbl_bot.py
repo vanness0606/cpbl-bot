@@ -11,20 +11,20 @@ WEBHOOK_URL = os.environ.get("WEBHOOK_URL")   # 從 Railway 環境變數讀取
 if not WEBHOOK_URL:
     raise ValueError("請設定 WEBHOOK_URL 環境變數")
 
-CHECK_INTERVAL = 60
+CHECK_INTERVAL = 120   # 每 2 分鐘檢查一次（建議值）
 STATE_FILE = "cpbl_trans_state.json"
 
 # 只通知這些球隊（留空 [] 就通知全部）
 WATCH_TEAMS = [
     "富邦悍將",
     "統一7-ELEVEn獅",
-     "樂天桃猿",
+    "樂天桃猿",
     "台鋼雄鷹",
-     "中信兄弟",
-     "味全龍",
-    
+    "中信兄弟",
+    "味全龍",
 ]
 # ============================
+
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 }
