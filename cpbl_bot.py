@@ -7,21 +7,19 @@ from datetime import datetime
 from collections import defaultdict
 
 # ========== 設定區 ==========
-WEBHOOK_URL = "https://discord.com/api/webhooks/1533695393119080648/arquhpRiUDxpG4eZvYWQOVhWDVzvkgGlJ_rm5pL4G-3uCPYz0F4TrCJxAhnmzCKf2GQT"        # ← 必填
-CHECK_INTERVAL = 300                           # 每幾秒檢查一次
+WEBHOOK_URL = os.environ.get("WEBHOOK_URL")   # 從 Railway 環境變數讀取
+if not WEBHOOK_URL:
+    raise ValueError("請設定 WEBHOOK_URL 環境變數")
+
+CHECK_INTERVAL = 300
 STATE_FILE = "cpbl_trans_state.json"
 
-# 只通知這些球隊（留空 [] 就通知全部球隊）
+# 只通知這些球隊（留空 [] 就通知全部）
 WATCH_TEAMS = [
-    "富邦悍將",
-    #"統一7-ELEVEn獅",
-    # "樂天桃猿",
-    # "台鋼雄鷹",
-    # "中信兄弟",
-    # "味全龍",
+    "富邦悍將"
+    
 ]
 # ============================
-
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 }
