@@ -5,13 +5,13 @@ import json
 import os
 from datetime import datetime
 from collections import defaultdict
-from datetime import datetime, timezone, timedelta
+
 # ========== 設定區 ==========
 WEBHOOK_URL = os.environ.get("WEBHOOK_URL")   # 從 Railway 環境變數讀取
 if not WEBHOOK_URL:
     raise ValueError("請設定 WEBHOOK_URL 環境變數")
 
-CHECK_INTERVAL = 120   # 每 2 分鐘檢查一次（建議值）
+CHECK_INTERVAL = 120   # 每 2 分鐘檢查一次
 STATE_FILE = "cpbl_trans_state.json"
 
 # 只通知這些球隊（留空 [] 就通知全部）
@@ -97,7 +97,7 @@ def send_discord(new_items):
         for i in items:
             description += f"**{i['player']}**（{i['team']}）→ {i['reason']}\n"
 
-                embeds.append({
+        embeds.append({
             "title": f"中職球員異動 - {date}",
             "description": description.strip(),
             "color": 0x1E90FF,
