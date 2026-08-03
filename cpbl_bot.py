@@ -7,7 +7,7 @@ from datetime import datetime
 from collections import defaultdict
 
 # ========== 設定區 ==========
-WEBHOOK_URL = "你的Discord_Webhook網址"        # ← 必填
+WEBHOOK_URL = "https://discord.com/api/webhooks/1533695393119080648/arquhpRiUDxpG4eZvYWQOVhWDVzvkgGlJ_rm5pL4G-3uCPYz0F4TrCJxAhnmzCKf2GQT"        # ← 必填
 CHECK_INTERVAL = 300                           # 每幾秒檢查一次
 STATE_FILE = "cpbl_trans_state.json"
 
