@@ -11,7 +11,7 @@ WEBHOOK_URL = os.environ.get("WEBHOOK_URL")   # 從 Railway 環境變數讀取
 if not WEBHOOK_URL:
     raise ValueError("請設定 WEBHOOK_URL 環境變數")
 
-CHECK_INTERVAL = 300
+CHECK_INTERVAL = 60
 STATE_FILE = "cpbl_trans_state.json"
 
 # 只通知這些球隊（留空 [] 就通知全部）
