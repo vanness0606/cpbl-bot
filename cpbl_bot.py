@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import time
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from collections import defaultdict
 
 # ========== 設定區 ==========
@@ -28,6 +28,10 @@ WATCH_TEAMS = [
 HEADERS = {
     "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36"
 }
+
+def now_tw():
+    """取得台灣時間"""
+    return datetime.now(timezone(timedelta(hours=8)))
 
 def get_transactions():
     """抓取目前球員異動資料"""
@@ -102,7 +106,7 @@ def send_discord(new_items):
             "description": description.strip(),
             "color": 0x1E90FF,
             "footer": {"text": "CPBL 球員異動監控"},
-            "timestamp": datetime.now().astimezone().isoformat()
+            "timestamp": now_tw().isoformat()
         })
 
     # 一次最多送 10 個 embed
@@ -145,19 +149,19 @@ def main():
 
                 if new_items:
                     new_items.sort(key=lambda x: x["date"], reverse=True)
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] 發現 {len(new_items)} 筆符合條件的新異動")
+                    print(f"[{now_tw().strftime('%H:%M:%S')}] 發現 {len(new_items)} 筆符合條件的新異動")
                     send_discord(new_items)
                 else:
-                    print(f"[{datetime.now().strftime('%H:%M:%S')}] 有新異動，但都不在監控球隊內")
+                    print(f"[{now_tw().strftime('%H:%M:%S')}] 有新異動，但都不在監控球隊內")
 
                 # 不管有沒有過濾，都要更新狀態，避免重複判斷
                 known = current_keys
                 save_state(known)
             else:
-                print(f"[{datetime.now().strftime('%H:%M:%S')}] 沒有新異動")
+                print(f"[{now_tw().strftime('%H:%M:%S')}] 沒有新異動")
 
         except Exception as e:
-            print(f"[{datetime.now().strftime('%H:%M:%S')}] 發生錯誤：{e}")
+            print(f"[{now_tw().strftime('%H:%M:%S')}] 發生錯誤：{e}")
 
         time.sleep(CHECK_INTERVAL)
 
