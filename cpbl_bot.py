@@ -12,8 +12,7 @@ if not WEBHOOK_URL:
     raise ValueError("請設定 WEBHOOK_URL 環境變數")
 
 CHECK_INTERVAL = 60  #每 2 分鐘檢查一次
-STATE_FILE = "cpbl_trans_state_test.json"   # 改檔名，強制當成第一次執行
-
+STATE_FILE = "cpbl_trans_state_new.json"
 # 只通知這些球隊（留空 [] 就通知全部）
 WATCH_TEAMS = [
     "富邦悍將",
