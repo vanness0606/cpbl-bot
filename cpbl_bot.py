@@ -11,7 +11,7 @@ WEBHOOK_URL = os.environ.get("WEBHOOK_URL")   # 從 Railway 環境變數讀取
 if not WEBHOOK_URL:
     raise ValueError("請設定 WEBHOOK_URL 環境變數")
 
-CHECK_INTERVAL = 120   # 每 2 分鐘檢查一次
+CHECK_INTERVAL = 60  #每 2 分鐘檢查一次
 STATE_FILE = "cpbl_trans_state_test.json"   # 改檔名，強制當成第一次執行
 
 # 只通知這些球隊（留空 [] 就通知全部）
